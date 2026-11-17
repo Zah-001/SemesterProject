@@ -18,11 +18,10 @@
 
             <nav class="dropdown" id="dropdownMenu">
                 <a href="#" data-page="home">Home</a>
-                 <a href="#" data-page="calculator">Binary Calculator</a>
+                <a href="#" data-page="calculator">Binary Calculator</a>
                 <a href="#" data-page="members">Members</a>
                 <a href="#" data-page="videos">Video Gallery</a>
                 <a href="#" data-page="documentation">Documentation</a>
-               
             </nav>
         </div>
     </header>
@@ -60,13 +59,35 @@
 
         <!-- Binary Calculator Page -->
         <section id="calculator" class="page">
+
             <h1>Binary Calculator</h1>
-            <p>Enter two binary numbers to perform a calculation.</p>
+
+            <p>Select a calculation mode and enter two numbers.</p>
 
             <div class="calculator">
-                <input type="text" id="number1"
-                    placeholder="First binary number">
 
+                <!-- Calculation Mode -->
+                <label for="mode">Calculation Mode:</label>
+
+                <select id="mode">
+                    <option value="unsigned">
+                        Unsigned Binary (8-bit)
+                    </option>
+
+                    <option value="signed">
+                        Signed Binary (Two's Complement, 8-bit)
+                    </option>
+
+                    <option value="decimal">
+                        Decimal
+                    </option>
+                </select>
+
+                <!-- First Number -->
+                <input type="text" id="number1"
+                    placeholder="First number">
+
+                <!-- Operation -->
                 <select id="operation">
                     <option value="add">Addition (+)</option>
                     <option value="subtract">Subtraction (-)</option>
@@ -74,18 +95,27 @@
                     <option value="divide">Division (÷)</option>
                 </select>
 
+                <!-- Second Number -->
                 <input type="text" id="number2"
-                    placeholder="Second binary number">
+                    placeholder="Second number">
 
+                <!-- Buttons -->
                 <button id="calculateButton">Calculate</button>
 
+                <button type="button" id="clearButton">
+                    Clear
+                </button>
+
+                <!-- Result -->
                 <div id="result">
                     Result will appear here.
                 </div>
+
             </div>
         </section>
     </main>
 
     <script src="script.js"></script>
+
 </body>
 </html>
