@@ -45,6 +45,7 @@ navigationLinks.forEach(function(link) {
 
 // Binary Calculator
 
+
 document.getElementById("calculateButton")
     .addEventListener("click", calculateBinary);
 
@@ -54,52 +55,158 @@ function calculateBinary() {
     const input2 = document.getElementById("number2").value.trim();
 
     const operation = document.getElementById("operation").value;
+    const mode = document.getElementById("mode").value;
+
     const resultDisplay = document.getElementById("result");
 
-    // Validate binary inputs
+    let num1, num2, result;
 
-    if (!/^[01]+$/.test(input1) || !/^[01]+$/.test(input2)) {
-        resultDisplay.textContent =
-            "Error: Please enter valid binary numbers (0 and 1 only).";
-        return;
+    // Convert signed 8-bit binary to decimal
+    function binaryToSigned(binary) {
+
+        let value = parseInt(binary, 2);
+
+        if (binary[0] === "1") {
+            value -= 256;
+        }
+
+        return value;
     }
 
-    const num1 = BigInt("0b" + input1);
-    const num2 = BigInt("0b" + input2);
+    // Convert decimal to 8-bit two's complement
+    function signedToBinary(number) {
 
-    let result;
+        if (number < -128 || number > 127) {
+            throw new Error("Result exceeds 8-bit signed range (-128 to 127).");
+        }
 
-    switch (operation) {
+        return (number & 255).toString(2).padStart(8, "0");
+    }
 
-        case "add":
-            result = num1 + num2;
-            break;
+    // Convert unsigned decimal to 8-bit binary
+    function unsignedToBinary(number) {
 
-        case "subtract":
-            result = num1 - num2;
-            break;
+        if (number < 0 || number > 255) {
+            throw new Error("Result exceeds 8-bit unsigned range (0 to 255).");
+        }
 
-        case "multiply":
-            result = num1 * num2;
-            break;
+        return number.toString(2).padStart(8, "0");
+    }
 
-        case "divide":
-            if (num2 === 0n) {
-                resultDisplay.textContent =
-                    "Error: Cannot divide by zero.";
-                return;
+    try {
+
+        // Validate and convert inputs
+        if (mode === "unsigned" || mode === "signed") {
+
+            if (!/^[01]{8}$/.test(input1) ||
+                !/^[01]{8}$/.test(input2)) {
+
+                throw new Error(
+                    "Please enter exactly 8 binary digits (0 and 1)."
+                );
             }
 
-            result = num1 / num2;
-            break;
+            if (mode === "signed") {
 
-        default:
-            resultDisplay.textContent = "Invalid operation.";
-            return;
+                num1 = binaryToSigned(input1);
+                num2 = binaryToSigned(input2);
+
+            } else {
+
+                num1 = parseInt(input1, 2);
+                num2 = parseInt(input2, 2);
+            }
+
+        } else {
+
+            if (input1 === "" || input2 === "" ||
+                !Number.isFinite(Number(input1)) ||
+                !Number.isFinite(Number(input2))) {
+
+                throw new Error("Please enter valid decimal numbers.");
+            }
+
+            num1 = Number(input1);
+            num2 = Number(input2);
+        }
+
+        // Perform calculation
+        switch (operation) {
+
+            case "add":
+                result = num1 + num2;
+                break;
+
+            case "subtract":
+                result = num1 - num2;
+                break;
+
+            case "multiply":
+                result = num1 * num2;
+                break;
+
+            case "divide":
+
+                if (num2 === 0) {
+                    throw new Error("Cannot divide by zero.");
+                }
+
+                result = mode === "decimal"
+                    ? num1 / num2
+                    : Math.trunc(num1 / num2);
+
+                break;
+
+            default:
+                throw new Error("Invalid operation.");
+        }
+
+        // Display results
+        if (mode === "signed") {
+
+            const binaryResult = signedToBinary(result);
+
+            resultDisplay.innerHTML =
+                "Signed Decimal Result: <strong>" + result +
+                "</strong><br><br>" +
+                "8-bit Two's Complement: <strong>" +
+                binaryResult + "</strong>";
+
+        } else if (mode === "unsigned") {
+
+            const binaryResult = unsignedToBinary(result);
+
+            resultDisplay.innerHTML =
+                "Decimal Result: <strong>" + result +
+                "</strong><br><br>" +
+                "8-bit Binary Result: <strong>" +
+                binaryResult + "</strong>";
+
+        } else {
+
+            const binaryResult =
+                Number.isInteger(result) && result >= 0
+                    ? result.toString(2)
+                    : "Not available for this decimal result";
+
+            resultDisplay.innerHTML =
+                "Decimal Result: <strong>" + result +
+                "</strong><br><br>" +
+                "Binary Result: <strong>" +
+                binaryResult + "</strong>";
+        }
+
+    } catch (error) {
+
+        resultDisplay.textContent = "Error: " + error.message;
     }
-
-    resultDisplay.innerHTML =
-        "Binary Result: <strong>" + result.toString(2) +
-        "</strong><br><br>Decimal Result: <strong>" +
-        result.toString() + "</strong>";
 }
+
+// Clear calculator
+function clearCalculator() {
+
+    document.getElementById("number1").value = "";
+    document.getElementById("number2").value = "";
+    document.getElementById("result").textContent = "";
+}
+
