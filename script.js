@@ -94,41 +94,51 @@ function calculateBinary() {
     }
 
     try {
+       
+if (mode === "unsigned" || mode === "signed") {
 
-        // Validate and convert inputs
-        if (mode === "unsigned" || mode === "signed") {
+    // Validate binary inputs (1 to 8 bits)
+    if (!/^[01]{1,8}$/.test(input1) ||
+        !/^[01]{1,8}$/.test(input2)) {
 
-            if (!/^[01]{8}$/.test(input1) ||
-                !/^[01]{8}$/.test(input2)) {
+        throw new Error(
+            "Enter between 1 and 8 binary digits (0 and 1 only)."
+        );
+    }
 
-                throw new Error(
-                    "Please enter exactly 8 binary digits (0 and 1)."
-                );
-            }
+    let binary1, binary2;
 
-            if (mode === "signed") {
+    if (mode === "signed") {
 
-                num1 = binaryToSigned(input1);
-                num2 = binaryToSigned(input2);
+        // Sign extension: repeat the leftmost bit
+        binary1 = input1.padStart(8, input1[0]);
+        binary2 = input2.padStart(8, input2[0]);
 
-            } else {
+        num1 = binaryToSigned(binary1);
+        num2 = binaryToSigned(binary2);
 
-                num1 = parseInt(input1, 2);
-                num2 = parseInt(input2, 2);
-            }
+    } else {
 
-        } else {
+        // Unsigned extension: always add zeros
+        binary1 = input1.padStart(8, "0");
+        binary2 = input2.padStart(8, "0");
 
-            if (input1 === "" || input2 === "" ||
-                !Number.isFinite(Number(input1)) ||
-                !Number.isFinite(Number(input2))) {
+        num1 = parseInt(binary1, 2);
+        num2 = parseInt(binary2, 2);
+    }
 
-                throw new Error("Please enter valid decimal numbers.");
-            }
+} else {
 
-            num1 = Number(input1);
-            num2 = Number(input2);
-        }
+    if (input1 === "" || input2 === "" ||
+        !Number.isFinite(Number(input1)) ||
+        !Number.isFinite(Number(input2))) {
+
+        throw new Error("Please enter valid decimal numbers.");
+    }
+
+    num1 = Number(input1);
+    num2 = Number(input2);
+}
 
         // Perform calculation
         switch (operation) {
