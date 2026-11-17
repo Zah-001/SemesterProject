@@ -213,6 +213,8 @@ if (mode === "unsigned" || mode === "signed") {
 }
 
 // Clear calculator
+document.getElementById("clearButton")
+    .addEventListener("click", clearCalculator);
 function clearCalculator() {
 
     document.getElementById("number1").value = "";
