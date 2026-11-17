@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="navigation">
+            <button class="menu-button" id="menuButton">
+                ☰ MENU
+            </button>
+
+            <nav class="dropdown" id="dropdownMenu">
+                <a href="#" data-page="home">Home</a>
+                <a href="#" data-page="members">Members</a>
+                <a href="#" data-page="videos">Video Gallery</a>
+                <a href="#" data-page="documentation">Documentation</a>
+                <a href="#" data-page="calculator">Binary Calculator</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Cover Page -->
+    <main>
+        <section id="home" class="page active">
+            <h1>Welcome to My Website</h1>
+            <p>Welcome! Explore the different sections of this website using the navigation menu.</p>
+        </section>
+
+        <!-- Members Page -->
+        <section id="members" class="page">
+            <h1>Members</h1>
+            <p>Welcome to the members page.</p>
+            <p>Member information will be added here.</p>
+        </section>
+
+        <!-- Video Gallery Page -->
+        <section id="videos" class="page">
+            <h1>Video Gallery</h1>
+            <p>Watch videos in our collection.</p>
+
+            <div class="video-container">
+                <p>Your videos will appear here.</p>
+            </div>
+        </section>
+
+        <!-- Documentation Page -->
+        <section id="documentation" class="page">
+            <h1>Documentation</h1>
+            <p>Welcome to the documentation section.</p>
+            <p>Guides, instructions and documents will be added here.</p>
+        </section>
+
+        <!-- Binary Calculator Page -->
+        <section id="calculator" class="page">
+            <h1>Binary Calculator</h1>
+            <p>Enter two binary numbers to perform a calculation.</p>
+
+            <div class="calculator">
+                <input type="text" id="number1"
+                    placeholder="First binary number">
+
+                <select id="operation">
+                    <option value="add">Addition (+)</option>
+                    <option value="subtract">Subtraction (-)</option>
+                    <option value="multiply">Multiplication (×)</option>
+                    <option value="divide">Division (÷)</option>
+                </select>
+
+                <input type="text" id="number2"
+                    placeholder="Second binary number">
+
+                <button id="calculateButton">Calculate</button>
+
+                <div id="result">
+                    Result will appear here.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
