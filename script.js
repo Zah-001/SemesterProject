@@ -222,3 +222,22 @@ function clearCalculator() {
     document.getElementById("result").textContent = "";
 }
 
+/* ==========================================
+   INTRODUCTION DROPDOWN
+   ========================================== */
+
+const introToggle = document.getElementById("introToggle");
+const introContent = document.getElementById("introContent");
+
+introToggle.addEventListener("click", function () {
+
+    const isOpen = introToggle.getAttribute("aria-expanded") === "true";
+
+    introToggle.setAttribute("aria-expanded", !isOpen);
+
+    introContent.hidden = isOpen;
+
+    introToggle.classList.toggle("open", !isOpen);
+
+});
+
