@@ -241,3 +241,136 @@ introToggle.addEventListener("click", function () {
 
 });
 
+
+/* ==============================
+   MEMBERS PAGE FUNCTIONALITY
+============================== */
+
+const members = {
+
+    ashton: {
+        name: "Ashton Alton Jones",
+        role: "Bachelor's in Information Technology",
+        image: "images/WhatsApp Image 2026-11-16 at 8.24.51 AM (1).jpeg",
+
+        biography: `My name is Ashton Alton Jones, although I mostly go by the aliases "Ash-t" and "Tubby". Some may perceive me as shy, and contrary to that belief, I am still shy. However, I know when to make my presence known and felt when needed. I am currently enrolled in the Bachelor's in Information Technology program.
+
+Growing up, I have always been fascinated by how mechanisms work, intrigued by how things are made and built. Through this curiosity, I learned that I want to become skilled by gaining knowledge and applying it. However, what good are knowledge and skills without wisdom? Wisdom is knowing how to use the knowledge gained and develop those skills.
+
+My first real exposure to IT came when my family got our first desktop computer. I remember using floppy disks to store files and information. Since we did not have an internet connection, we used a Wi-Fi dongle and received permission to access our neighbour's connection. Later came the installation of games and applications such as Virtual DJ and Mavis Beacon, followed by the transition from floppy disks to CD-ROMs.
+
+My favourite topics are Operating Systems and Networking and the Internet. Before choosing this career path, I often wondered what happened behind the scenes when computers booted up and how multiple devices received network and internet connectivity simultaneously.
+
+I am fascinated by how technology continues to evolve and revolutionize the world. I believe we must continue learning, focus on the fundamentals, use our imagination, and create. Knowledge and skills must be accompanied by wisdom. I strive to take pride in my work, avoid complacency, and contribute to the continued advancement of Information Technology.`
+    },
+
+    gabriel: {
+        name: "Gabriel Natanael Pivaral",
+        role: "Associate's in Information Technology",
+        image: "images/Screenshot 2026-11-18 151542.png",
+
+        biography: `My name is Gabriel Natanael Pivaral, the name given to me by my parents. I am known for being quiet because I do not like to speak much. I have always been someone willing to assist others, and I have developed interests in many different things. I am currently studying in the Associate's in Information Technology program.
+
+When I was little, I was always interested in using computers. During the COVID-19 period, my interest grew even more. My curiosity about how electronic software and hardware work inspired me to study this field.
+
+My main interest in IT is programming websites and creating User Interfaces (UI). Although I still have much to learn in these areas, I am putting all my effort into this program so that I can achieve my goals.
+
+My favourite topic is Networking and Internet (N&I). I enjoy this topic because I already have some background knowledge, partly because my father works in this area of IT, especially networking and internet services.
+
+Through my studies, I have gained a better understanding of how data is transferred from point A to point B and the different networking topologies. These are some of the new things I have learned that have strengthened my interest in Networking and Internet.`
+    },
+
+    alsthon: {
+        name: "Alsthon Segura",
+        role: "Information Technology Student - University of Belize",
+        image: "images/20230813_124444.jpg",
+
+        biography: `My name is Alsthon Segura, and I am 20 years old. I attended Saint Joseph Primary School and Belize Adventist College High School, where I studied science.
+
+I currently attend the University of Belize (UB), majoring in Information Technology.
+
+I enjoy movies, television shows, books, games, and music. My sincere goal is to pursue a career in Information Technology and secure a job in the IT field.`
+    },
+
+    zaheem: {
+        name: "Zaheem Humes",
+        role: "Information Technology Student",
+        image: null,
+
+        biography: `My interest in Information Technology developed through my family's influence and exposure to technology. This sparked my curiosity and encouraged me to explore the world of IT.
+
+Among the topics I have studied, my favourite has been Computer Graphics. I particularly enjoy learning about the visual and creative side of technology and how graphics contribute to the digital world.`
+    }
+
+};
+
+
+/* DISPLAY SELECTED MEMBER */
+
+const memberCards = document.querySelectorAll(".member-card");
+const detailName = document.getElementById("detailName");
+const detailRole = document.getElementById("detailRole");
+const detailBiography = document.getElementById("detailBiography");
+const profileImage = document.querySelector(".profile-image");
+
+
+function showMember(memberId) {
+
+    const member = members[memberId];
+
+    if (!member) return;
+
+    // Update member information
+    detailName.textContent = member.name;
+    detailRole.textContent = member.role;
+    detailBiography.textContent = member.biography;
+
+    // Update profile image
+    if (member.image) {
+
+        profileImage.innerHTML = `
+            <img src="${member.image}"
+                 alt="${member.name}"
+                 onerror="this.style.display='none'">
+        `;
+
+    } else {
+
+        profileImage.innerHTML = `
+            <div class="member-placeholder profile-placeholder">
+                ZH
+            </div>
+        `;
+
+    }
+
+    // Highlight selected member
+    memberCards.forEach(card => {
+
+        card.classList.remove("active");
+
+        if (card.dataset.member === memberId) {
+            card.classList.add("active");
+        }
+
+    });
+
+}
+
+
+// Add click functionality
+memberCards.forEach(card => {
+
+    card.addEventListener("click", () => {
+
+        const memberId = card.dataset.member;
+
+        showMember(memberId);
+
+    });
+
+});
+
+
+// Display Ashton when the page first loads
+showMember("ashton");
