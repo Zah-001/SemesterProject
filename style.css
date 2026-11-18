@@ -422,6 +422,189 @@ p {
     box-shadow: inset 0 0 15px rgba(32,200,120,0.05);
 }
 
+
+/* ==========================================
+   DIGITAL FOREST INTRODUCTION DROPDOWN
+   ========================================== */
+
+.introduction-container {
+    max-width: 850px;
+    margin: 35px auto 10px;
+    text-align: left;
+}
+
+/* Dropdown Button */
+
+.intro-toggle {
+    width: 100%;
+    padding: 20px 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: linear-gradient(
+        120deg,
+        #103D29,
+        #185638
+    );
+
+    color: #8CFFB0;
+
+    border: 1px solid rgba(95,255,155,0.35);
+    border-radius: 12px;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 15px rgba(32,200,120,0.08);
+
+    transition: all 0.3s ease;
+}
+
+.intro-toggle:hover {
+    background: linear-gradient(
+        120deg,
+        #185638,
+        #207548
+    );
+
+    border-color: #20C878;
+
+    box-shadow:
+        0 0 18px rgba(32,200,120,0.25);
+
+    transform: translateY(-2px);
+}
+
+/* Arrow Animation */
+
+.intro-arrow {
+    color: #8CFFB0;
+    font-size: 16px;
+
+    transition: transform 0.3s ease;
+}
+
+.intro-toggle.open .intro-arrow {
+    transform: rotate(180deg);
+}
+
+/* Introduction Panel */
+
+.intro-content {
+    margin-top: 12px;
+
+    background: rgba(6,25,17,0.95);
+
+    border: 1px solid rgba(95,255,155,0.2);
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    animation: introAppear 0.35s ease;
+}
+
+/* Scrollable Text */
+
+.intro-scroll {
+    max-height: 350px;
+
+    overflow-y: auto;
+
+    padding: 25px 28px;
+
+    scrollbar-width: thin;
+    scrollbar-color: #20C878 #0B241A;
+}
+
+.intro-scroll h2 {
+    color: #8CFFB0;
+    font-size: 24px;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 0 12px rgba(140,255,176,0.2);
+}
+
+.intro-scroll p {
+    color: #B6CDBD;
+
+    font-size: 16px;
+    line-height: 1.9;
+
+    margin-bottom: 20px;
+
+    text-align: justify;
+}
+
+/* Custom Scrollbar - Chrome/Edge */
+
+.intro-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.intro-scroll::-webkit-scrollbar-track {
+    background: #0B241A;
+    border-radius: 10px;
+}
+
+.intro-scroll::-webkit-scrollbar-thumb {
+    background: #20C878;
+    border-radius: 10px;
+}
+
+.intro-scroll::-webkit-scrollbar-thumb:hover {
+    background: #8CFFB0;
+}
+
+/* Opening Animation */
+
+@keyframes introAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .introduction-container {
+        margin-top: 25px;
+    }
+
+    .intro-toggle {
+        padding: 16px;
+        font-size: 15px;
+    }
+
+    .intro-scroll {
+        max-height: 300px;
+        padding: 18px;
+    }
+
+    .intro-scroll p {
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .intro-scroll h2 {
+        font-size: 21px;
+    }
+}
+
+
 /* ==========================================
    ANIMATIONS
    ========================================== */
